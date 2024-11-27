@@ -36,6 +36,6 @@ public class Movie {
     }
 
     public double getCharge(int daysRented) {
-        return _price.getCharge(daysRented); // Chamada ao método movido.
+        return _price.getCharge(daysRented); // Delega para o método abstrato.
     }
 }

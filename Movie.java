@@ -47,4 +47,12 @@ public class Movie {
         }
         return thisAmount;
     }
+
+    public int getFrequentRenterPoints(int daysRented) {
+        // Lógica transferida de Rental
+        if (getPriceCode() == NEW_RELEASE && daysRented > 1) {
+            return 2;
+        }
+        return 1;
+    }
 }

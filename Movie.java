@@ -1,7 +1,7 @@
 public class Movie {
-    public static final int CHILDRENS = 2;
     public static final int REGULAR = 0;
-    public static final int NEW_RELEASE = 1;
+    public static final int CHILDRENS = 1;
+    public static final int NEW_RELEASE = 2;
 
     private String _title;
     private Price _price;
@@ -36,10 +36,10 @@ public class Movie {
     }
 
     public double getCharge(int daysRented) {
-        return _price.getCharge(daysRented); // Delegando à classe `Price`.
+        return _price.getCharge(daysRented);
     }
 
     public int getFrequentRenterPoints(int daysRented) {
-        return _price.getFrequentRenterPoints(daysRented); // Nova delegação.
+        return _price.getFrequentRenterPoints(daysRented);
     }
 }

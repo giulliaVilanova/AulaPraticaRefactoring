@@ -35,7 +35,26 @@ public class Customer {
         return result;
     }
 
-    // Novo método para calcular o valor total dos aluguéis
+    // Novo método para gerar o comprovante em HTML
+    public String htmlStatement() {
+        Enumeration rentals = _rentals.elements();
+        String result = "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n";
+
+        while (rentals.hasMoreElements()) {
+            Rental each = (Rental) rentals.nextElement();
+
+            // Adicionar os detalhes de cada aluguel
+            result += each.getMovie().getTitle() + ": " + each.getCharge() + "<BR>\n";
+        }
+
+        // Adicionar o total e os pontos ao rodapé
+        result += "<P>You owe <EM>" + getTotalCharge() + "</EM><P>\n";
+        result += "On this rental you earned <EM>" +
+                getTotalFrequentRenterPoints() +
+                "</EM> frequent renter points<P>";
+        return result;
+    }
+
     private double getTotalCharge() {
         double result = 0;
         Enumeration rentals = _rentals.elements();
@@ -46,7 +65,6 @@ public class Customer {
         return result;
     }
 
-    // Novo método para calcular os pontos totais
     private int getTotalFrequentRenterPoints() {
         int result = 0;
         Enumeration rentals = _rentals.elements();

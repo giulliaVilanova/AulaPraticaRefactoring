@@ -17,45 +17,11 @@ public class Customer {
         return _name;
     }
 
-    public String statement() {
-        Enumeration rentals = _rentals.elements();
-        String result = "Rental Record for " + getName() + "\n";
-
-        while (rentals.hasMoreElements()) {
-            Rental each = (Rental) rentals.nextElement();
-
-            // Mostrar os detalhes de cada aluguel
-            result += "\t" + each.getMovie().getTitle() + "\t" +
-                    each.getCharge() + "\n";
-        }
-
-        // Adicionar o total e os pontos ao rodapé
-        result += "Amount owed is " + getTotalCharge() + "\n";
-        result += "You earned " + getTotalFrequentRenterPoints() + " frequent renter points";
-        return result;
+    public Enumeration getRentals() {
+        return _rentals.elements();
     }
 
-    // Novo método para gerar o comprovante em HTML
-    public String htmlStatement() {
-        Enumeration rentals = _rentals.elements();
-        String result = "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n";
-
-        while (rentals.hasMoreElements()) {
-            Rental each = (Rental) rentals.nextElement();
-
-            // Adicionar os detalhes de cada aluguel
-            result += each.getMovie().getTitle() + ": " + each.getCharge() + "<BR>\n";
-        }
-
-        // Adicionar o total e os pontos ao rodapé
-        result += "<P>You owe <EM>" + getTotalCharge() + "</EM><P>\n";
-        result += "On this rental you earned <EM>" +
-                getTotalFrequentRenterPoints() +
-                "</EM> frequent renter points<P>";
-        return result;
-    }
-
-    private double getTotalCharge() {
+    public double getTotalCharge() {
         double result = 0;
         Enumeration rentals = _rentals.elements();
         while (rentals.hasMoreElements()) {
@@ -65,7 +31,7 @@ public class Customer {
         return result;
     }
 
-    private int getTotalFrequentRenterPoints() {
+    public int getTotalFrequentRenterPoints() {
         int result = 0;
         Enumeration rentals = _rentals.elements();
         while (rentals.hasMoreElements()) {
@@ -73,5 +39,13 @@ public class Customer {
             result += each.getFrequentRenterPoints();
         }
         return result;
+    }
+
+    public String statement() {
+        return new TextStatement().value(this); // Delegação para TextStatement
+    }
+
+    public String htmlStatement() {
+        return new HtmlStatement().value(this); // Delegação para HtmlStatement
     }
 }

@@ -18,3 +18,4 @@ public class TextStatement extends Statement {
                 " frequent renter points";
     }
 }
+
